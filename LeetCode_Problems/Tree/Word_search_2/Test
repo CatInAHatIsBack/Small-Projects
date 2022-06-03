@@ -1,0 +1,80 @@
+package Word_search_2;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+class Solution {
+    public static void main(String[] args) {
+        
+        char[][] board = {{'o','a','a','n'},
+                          {'e','t','a','e'},
+                          {'i','h','k','r'},
+                          {'i','f','l','v'}};
+
+        String[] words = {"oath","pea","eat","rain", "hklf", "hf"};
+        List<String> res = findWords(board, words);
+        for (String s: res) {
+            System.out.println(s);    
+        }
+    }
+    static List<String> findWords(char[][] gboard, String[] words) {
+        board = gboard;
+
+        for(String s : words){
+            insert(s);
+        }
+        int rows = board.length; 
+        int cols = board[0].length;
+
+        for (int i = 0; i < rows ; i++) {
+            for (int j = 0; j < cols; j++) {
+                dfs(root, i, j, new ArrayList<Character>());
+            }
+        }
+        return new ArrayList<>(result);
+    }
+    static char[][] board;
+    static TrieNode root = new TrieNode(); 
+    static Set<String> result = new HashSet<>();
+    static class TrieNode{
+        boolean isLast = false;
+        Map<Character, TrieNode> map = new HashMap<>();
+    }
+    static void insert(String str){
+        TrieNode curr = root;
+        char[] c = str.toCharArray();
+        for (int i = 0; i < c.length; i++) {
+            curr.map.putIfAbsent(c[i], new TrieNode());
+            curr = curr.map.get(c[i]);
+        }
+        curr.isLast = true;
+        
+    }
+    static void dfs(TrieNode node, int i,int j, List<Character> wordSoFar) {
+        if(i < 0 || j < 0 ||
+        i > board.length-1 || j > board[0].length -1 ||
+        !node.map.containsKey(board[i][j]) || board[i][j] == '!')
+           return; 
+        char curr = board[i][j];
+        board[i][j] = '!';
+        node = node.map.get(curr);
+        wordSoFar.add(curr);
+        if(node.isLast) {
+            StringBuilder sb = new StringBuilder();
+            for (Character ch : wordSoFar) {
+                sb.append(ch);
+            }
+            result.add(sb.toString());
+        }
+        dfs(node,i+1,j, wordSoFar); // top
+        dfs(node,i,j+1, wordSoFar); // right 
+        dfs(node,i-1,j, wordSoFar); // bot 
+        dfs(node,i,j-1, wordSoFar); // left 
+        board[i][j] = curr;
+        if(wordSoFar.get(wordSoFar.size()-1) == curr) wordSoFar.remove(wordSoFar.size()-1);
+    } 
+}

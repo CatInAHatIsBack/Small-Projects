@@ -1,0 +1,25 @@
+<nb-layout>
+
+  <nb-layout-header fixed>
+  <!-- Insert header here -->
+    <h2>{{topLeft}}</h2>
+  </nb-layout-header>
+
+  <nb-layout-column>
+    
+    
+    <nav>
+      <a routerLink="/home">home</a>
+      <a routerLink="/tic-tac-toe">tic-tac-toe</a>
+      <a routerLink="/google-foobar">google-foobar</a>
+       
+    </nav>
+    <router-outlet></router-outlet>
+    
+  </nb-layout-column>
+
+  <nb-layout-footer fixed>
+  <!-- Insert footer here -->
+  </nb-layout-footer>
+
+</nb-layout>

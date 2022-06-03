@@ -1,0 +1,12 @@
+main {
+    display: grid;
+    grid-template-columns: 200px 200px 200px;
+    grid-gap: 1px;
+}
+
+app-square {
+    border: 1px solid rgb(22, 8, 8);
+    height: 200px;
+    background-color: rgb(11, 23, 11);
+    color: rgb(211, 12, 12);
+}
