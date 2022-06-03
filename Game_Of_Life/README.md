@@ -1,0 +1,2 @@
+# Game_Of_Life
+2 verions of game of life. not much thought given to the aesthetic but... ya know.  "game" i  think has a wrap around. might be a gameoflife calculator in there somewhere, if not i will add it later. it was for a kata.
